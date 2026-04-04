@@ -15,6 +15,15 @@ const randomizer = story =>  {
     let newStory = [];
     let replaceWord = "";
     storyArray.forEach(word => {
+        // Step 1: Check for punctuation at the end
+        let punctuation = "";
+        let lastChar = word[word.length - 1];
+
+        if (lastChar === "," || lastChar === "." || lastChar === "!" || lastChar === "?") {
+            punctuation = lastChar;
+            word = word.slice(0, -1); // remove punctuation
+        }
+
         switch(word) {
             case "SETTING": replaceWord = randomWord(setting); break;
             case "OBSTACLE": replaceWord = randomWord(obstacle); break;
@@ -23,7 +32,7 @@ const randomizer = story =>  {
             case "TWIST": replaceWord = randomWord(twist); break;
             default: replaceWord = word;
         }
-    newStory.push(replaceWord);
+    newStory.push(replaceWord + punctuation);
 
 });
 return newStory.join(" ");
